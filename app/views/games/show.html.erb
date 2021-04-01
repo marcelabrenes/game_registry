@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @game.name %>
+</p>
+
+<p>
+  <strong>Download:</strong>
+  <% if @game.rule.attached? %>
+    <%= link_to @game.rule.filename, rails_blob_path(@game.rule, disposition: 'attachment') %>
+  <% end %>
+</p>
+
+  <% if @game.images.attached? %>
+  <ul>
+    <% @game.images.each do |image| %>
+      <li><%= image_tag image.variant(resize:'200x200').processed %></li>  
+    <% end %>
+  </ul>
+
+<% end %>
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
